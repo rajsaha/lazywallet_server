@@ -50,10 +50,11 @@ const typeDefs = `
     }
     
     type Query {
-        getRegularExpense(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpense]
+        getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpense]
+        getRegularExpense(id: ID, userId: ID): [_RegExpenses]
     }
     
-    input RegularExpenseInput {
+    input _New_RegularExpenseInput {
         userId: ID
         typeId: ID
         amount: Int
@@ -62,8 +63,25 @@ const typeDefs = `
         days: [DayInput]
     }
     
+    input _Update_RegularExpenseInput {
+        id: ID
+        userId: ID
+        typeId: ID
+        amount: Int
+        repeat: Boolean
+        time: String
+        days: [DayInput]
+    }
+    
+    input _Delete_RegularExpenseInput {
+        id: ID,
+        userId: ID
+    }
+    
     type Mutation {
-        createRegularExpense(input: RegularExpenseInput): RegularExpenseInputReturn
+        createRegularExpense(input: _New_RegularExpenseInput): RegularExpenseInputReturn
+        updateRegularExpense(input: _Update_RegularExpenseInput): RegularExpenseInputReturn
+        deleteRegularExpense(input: _Delete_RegularExpenseInput): RegularExpenseInputReturn
     }`;
 
 const schema = makeExecutableSchema({typeDefs, resolvers})
