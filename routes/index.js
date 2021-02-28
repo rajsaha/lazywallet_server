@@ -4,7 +4,7 @@ let indexRouter = express.Router();
 
 /* GET home page. */
 indexRouter.get('/', (req, res, next) => {
-  res.send('Graphql');
+    res.send('Graphql');
 });
 
 module.exports = indexRouter;
