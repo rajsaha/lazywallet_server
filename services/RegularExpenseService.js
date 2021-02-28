@@ -34,6 +34,7 @@ const RegularExpenseService = (() => {
                                 _id: 1,
                                 typeId: "$expensetype.typeId",
                                 typeDesc: "$expensetype.typeDesc",
+                                title: 1,
                                 amount: 1,
                                 repeat: 1,
                                 time: 1,
@@ -83,6 +84,7 @@ const RegularExpenseService = (() => {
                 const newRegExpense = new RegExpense({
                     typeId: input.typeId,
                     userId: input.userId,
+                    title: input.title,
                     amount: input.amount,
                     repeat: input.repeat,
                     time: input.time,
@@ -151,6 +153,7 @@ const RegularExpenseService = (() => {
                                             _id: 1,
                                             typeId: "$expensetype.typeId",
                                             typeDesc: "$expensetype.typeDesc",
+                                            title: 1,
                                             amount: 1,
                                             repeat: 1,
                                             time: 1,

@@ -5,30 +5,27 @@ import indexRouter from './routes/index';
 import {graphqlHTTP} from "express-graphql";
 import {schema} from './data/schema';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-// Mongodb connection string
-try {
-    const mongodb_connection_string = `mongodb+srv://raj:t97Z8itZW0zkcZYc@cluster0.ddnqu.mongodb.net/lazywallet?retryWrites=true&w=majority`;
+dotenv.config({path: './dev.env'});
+const mongodb_connection_string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ddnqu.mongodb.net/lazywallet?retryWrites=true&w=majority`;
 
-    mongoose
-        .connect(mongodb_connection_string, {
-            useNewUrlParser: true,
-            useFindAndModify: false,
-            useUnifiedTopology: true
-        })
-        .then(res => {
-            console.log("Connected to database");
-        });
-
-    //! If mongodb connection fails
-    mongoose.connection.on("error", err => {
-        console.log(`Mongoose connection error: ${err}`);
+mongoose
+    .connect(mongodb_connection_string, {
+        useNewUrlParser: true,
+        useFindAndModify: false,
+        useUnifiedTopology: true
+    })
+    .then(res => {
+        console.log("Connected to database");
     });
 
-    mongoose.set("useCreateIndex", true);
-} catch (error) {
-    console.error(error);
-}
+//! If mongodb connection fails
+mongoose.connection.on("error", err => {
+    console.log(`Mongoose connection error: ${err}`);
+});
+
+mongoose.set("useCreateIndex", true);
 
 let app = express();
 app.use(morgan('dev'));
@@ -42,4 +39,4 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-module.exports = app;
+export {app};

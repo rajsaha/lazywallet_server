@@ -11,6 +11,10 @@ const RegExpenseSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
+    title: {
+        type: String,
+        required: true
+    },
     amount: {
         type: Number,
         required: true
