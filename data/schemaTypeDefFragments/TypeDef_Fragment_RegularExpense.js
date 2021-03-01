@@ -18,6 +18,7 @@ const Fragment_RegularExpense = `
         repeat: Boolean
         time: String
         days: [Day]
+        timestamp: String
     }
     
     type _count {
