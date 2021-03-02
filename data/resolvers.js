@@ -1,7 +1,12 @@
 import {RegularExpenseService} from "../services/RegularExpenseService";
+import {GraphQLDateTime} from "graphql-iso-date";
 
 // resolver map
-export const resolvers = {
+const customScalarResolver = {
+    Date: GraphQLDateTime,
+};
+
+const resolvers = {
     Query: {
         getRegularExpenses: async (root, {pageNo, size, skip, userId}) => {
             const _result = await RegularExpenseService.getRegularExpenses({pageNo, size, skip, userId});
@@ -10,7 +15,7 @@ export const resolvers = {
         getRegularExpense: async (root, {id, userId}) => {
             const _result = await RegularExpenseService.getRegularExpense({id, userId});
             return _result;
-        }
+        },
     },
     Mutation: {
         createRegularExpense: async (root, {input}) => {
@@ -27,3 +32,5 @@ export const resolvers = {
         }
     },
 };
+
+export {customScalarResolver, resolvers};

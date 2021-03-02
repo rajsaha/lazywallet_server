@@ -18,7 +18,7 @@ const Fragment_RegularExpense = `
         repeat: Boolean
         time: String
         days: [Day]
-        timestamp: String
+        timestamp: Date
     }
     
     type _count {
@@ -35,7 +35,7 @@ const Fragment_RegularExpense = `
         repeat: Boolean
         time: String
         days: [Day]
-        timestamp: String
+        timestamp: Date
     }
     
     input DayInput {

@@ -4,7 +4,7 @@ const Fragment_Expense = `
         typeId: Int
         typeDesc: String
         amount: Int
-        timestamp: String
+        timestamp: Date
     }
 `;
 

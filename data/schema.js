@@ -1,9 +1,11 @@
 import {makeExecutableSchema} from 'graphql-tools';
-import {resolvers} from "./resolvers";
+import {customScalarResolver, resolvers} from "./resolvers";
 import {Fragment_RegularExpense} from "./schemaTypeDefFragments/TypeDef_Fragment_RegularExpense";
 import {Fragment_User} from "./schemaTypeDefFragments/TypeDef_Fragment_User";
 
 const typeDefs = `
+    scalar Date
+    
     ${Fragment_RegularExpense}
     ${Fragment_User}
     type Query {
@@ -17,6 +19,6 @@ const typeDefs = `
         deleteRegularExpense(input: _Delete_RegularExpenseInput): RegularExpenseInputReturn
     }`;
 
-const schema = makeExecutableSchema({typeDefs, resolvers})
+const schema = makeExecutableSchema({typeDefs, resolvers: [customScalarResolver, resolvers]})
 
 export {schema};
