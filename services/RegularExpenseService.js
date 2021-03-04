@@ -38,7 +38,8 @@ const RegularExpenseService = (() => {
                                 amount: 1,
                                 repeat: 1,
                                 time: 1,
-                                days: 1
+                                days: 1,
+                                timestamp: 1
                             },
                         },
                     ])
@@ -157,7 +158,8 @@ const RegularExpenseService = (() => {
                                             amount: 1,
                                             repeat: 1,
                                             time: 1,
-                                            days: 1
+                                            days: 1,
+                                            timestamp: 1
                                         },
                                     },
                                     {
