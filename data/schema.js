@@ -2,10 +2,12 @@ import {makeExecutableSchema} from 'graphql-tools';
 import {customScalarResolver, resolvers} from "./resolvers";
 import {Fragment_RegularExpense} from "./schemaTypeDefFragments/TypeDef_Fragment_RegularExpense";
 import {Fragment_User} from "./schemaTypeDefFragments/TypeDef_Fragment_User";
+import {Fragment_Expense} from "./schemaTypeDefFragments/TypeDef_Fragment_Expense";
 
 const typeDefs = `
     scalar Date
     
+    ${Fragment_Expense}
     ${Fragment_RegularExpense}
     ${Fragment_User}
     type Query {
