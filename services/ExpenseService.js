@@ -1,11 +1,36 @@
 import {Expense} from "../data/models/Expense";
 import mongoose from "mongoose";
-import {RegExpense} from "../data/models/RegExpense";
 
 const ExpenseService = (() => {
     const getExpenses = async (input) => {
         return new Promise((resolve, reject) => {
             try {
+                // Time
+                let timestamp = {};
+                switch (input.period) {
+                    case "today":
+                        timestamp = {
+                            $lt: new Date(),
+                            $gte: new Date(new Date().setDate(new Date().getDate()-1))
+                        };
+                        break;
+                    case "this_week":
+                        timestamp = {
+                            $lt: new Date(),
+                            $gte: new Date(new Date().setDate(new Date().getDate()-7))
+                        };
+                        break;
+                    case "everything":
+                        timestamp = {
+                            $lt: new Date(),
+                        };
+                        break;
+                    default:
+                        timestamp = {
+                            $lt: new Date(),
+                        };
+                        break;
+                }
                 // Set up pagination
                 const pageNo = input.pageNo;
                 const size = input.size;
@@ -38,7 +63,8 @@ const ExpenseService = (() => {
                     },
                     {
                         $match: {
-                            userId: mongoose.Types.ObjectId(input.userId)
+                            userId: mongoose.Types.ObjectId(input.userId),
+                            timestamp: timestamp,
                         }
                     },
                     {
@@ -81,6 +107,19 @@ const ExpenseService = (() => {
                                     },
                                 },
                             ],
+                            total: [
+                                {
+                                    $match: {
+                                        userId: mongoose.Types.ObjectId(input.userId),
+                                    },
+                                },
+                                {
+                                    $group: {
+                                        _id: null,
+                                        total: {$sum: "$amount"}
+                                    }
+                                }
+                            ]
                         },
                     },
                 ]).exec((err, result) => {

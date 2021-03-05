@@ -13,7 +13,7 @@ const typeDefs = `
     type Query {
         getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpenses]
         getRegularExpense(id: ID, userId: ID): [_RegExpense]
-        getExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [Expenses]
+        getExpenses(pageNo: Int, size: Int, skip: Int, userId: ID, period: String): [Expenses]
     }
     
     type Mutation {

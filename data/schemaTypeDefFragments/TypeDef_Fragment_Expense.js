@@ -1,7 +1,12 @@
 const Fragment_Expense = `
     type Expenses {
-        expenses: [_Expense],
+        expenses: [_Expense]
         count: [_count]
+        total: [_total]
+    }
+    
+    type _total {
+        total: Int
     }
     
     type _Expense {

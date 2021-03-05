@@ -19,8 +19,8 @@ const resolvers = {
             return _result;
         },
         // Expense / History
-        getExpenses: async (root, {pageNo, size, skip, userId}) => {
-            const _result = await ExpenseService.getExpenses({pageNo, size, skip, userId});
+        getExpenses: async (root, {pageNo, size, skip, userId, period}) => {
+            const _result = await ExpenseService.getExpenses({pageNo, size, skip, userId, period});
             return _result;
         }
     },
