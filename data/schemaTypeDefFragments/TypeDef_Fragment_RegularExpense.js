@@ -4,12 +4,12 @@ const Fragment_RegularExpense = `
         selected: Boolean
     }
     
-    type RegularExpense {
-        regExpenses: [_RegExpenses],
+    type RegularExpenses {
+        regExpenses: [_RegExpense],
         count: [_count]
     }
     
-    type _RegExpenses {
+    type _RegExpense {
         _id: ID
         typeId: [Int]
         typeDesc: [String]

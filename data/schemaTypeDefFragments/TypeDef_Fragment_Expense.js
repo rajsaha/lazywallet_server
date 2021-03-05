@@ -1,8 +1,22 @@
 const Fragment_Expense = `
+    type Expenses {
+        expenses: [_Expense],
+        count: [_count]
+    }
+    
     type _Expense {
         _id: ID
         typeId: [Int]
         typeDesc: [String]
+        title: String
+        amount: Int
+        timestamp: Date
+    }
+    
+    type ExpenseInputReturn {
+        _id: ID
+        typeId: ID
+        userId: ID
         title: String
         amount: Int
         timestamp: Date

@@ -11,14 +11,16 @@ const typeDefs = `
     ${Fragment_RegularExpense}
     ${Fragment_User}
     type Query {
-        getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpense]
-        getRegularExpense(id: ID, userId: ID): [_RegExpenses]
+        getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpenses]
+        getRegularExpense(id: ID, userId: ID): [_RegExpense]
+        getExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [Expenses]
     }
     
     type Mutation {
         createRegularExpense(input: _New_RegularExpenseInput): RegularExpenseInputReturn
         updateRegularExpense(input: _Update_RegularExpenseInput): RegularExpenseInputReturn
         deleteRegularExpense(input: _Delete_RegularExpenseInput): RegularExpenseInputReturn
+        deleteExpense(input: _Delete_ExpenseInput): ExpenseInputReturn
     }`;
 
 const schema = makeExecutableSchema({typeDefs, resolvers: [customScalarResolver, resolvers]})
