@@ -1,6 +1,7 @@
 import {RegularExpenseService} from "../services/RegularExpenseService";
 import {ExpenseService} from "../services/ExpenseService";
 import {GraphQLDateTime} from "graphql-iso-date";
+import {HomeService} from "../services/Home";
 
 // resolver map
 const customScalarResolver = {
@@ -21,6 +22,11 @@ const resolvers = {
         // Expense / History
         getExpenses: async (root, {pageNo, size, skip, userId, period}) => {
             const _result = await ExpenseService.getExpenses({pageNo, size, skip, userId, period});
+            return _result;
+        },
+        // Home
+        getHomeData: async (root, {userId}) => {
+            const _result = await HomeService.getHomeData({userId});
             return _result;
         }
     },
