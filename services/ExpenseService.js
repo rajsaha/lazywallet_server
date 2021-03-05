@@ -1,10 +1,24 @@
 import {Expense} from "../data/models/Expense";
 import mongoose from "mongoose";
+import {RegExpense} from "../data/models/RegExpense";
 
 const ExpenseService = (() => {
     const getExpenses = async (input) => {
         return new Promise((resolve, reject) => {
             try {
+                // Set up pagination
+                const pageNo = input.pageNo;
+                const size = input.size;
+                let query = {};
+                if (pageNo < 0 || pageNo === 0) {
+                    reject({
+                        error: true,
+                        message: "Invalid page number"
+                    });
+                }
+                query.skip = size * (pageNo - 1);
+                query.limit = size;
+
                 Expense.aggregate([
                     {
                         $lookup: {
@@ -79,6 +93,26 @@ const ExpenseService = (() => {
         });
     }
 
+    const createExpense = async (input) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const newExpense = new Expense({
+                    typeId: input.typeId,
+                    userId: input.userId,
+                    title: input.title,
+                    amount: input.amount,
+                });
+
+                newExpense.save((err, doc) => {
+                    if (err) reject({error: true, message: err.message})
+                    else resolve(doc);
+                });
+            } catch (err) {
+                reject({error: true, message: err.message})
+            }
+        })
+    }
+
     const deleteExpense = async (input) => {
         return new Promise(((resolve, reject) => {
             try {
@@ -94,6 +128,7 @@ const ExpenseService = (() => {
 
     return {
         getExpenses,
+        createExpense,
         deleteExpense
     }
 })();

@@ -39,6 +39,10 @@ const resolvers = {
             return _result;
         },
         // Expense / History
+        createExpense: async (root, {input}) => {
+            const _result = await ExpenseService.createExpense(input);
+            return _result;
+        },
         deleteExpense: async (root, {input}) => {
             const _result = await ExpenseService.deleteExpense(input);
             return _result;

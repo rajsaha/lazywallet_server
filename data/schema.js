@@ -20,6 +20,7 @@ const typeDefs = `
         createRegularExpense(input: _New_RegularExpenseInput): RegularExpenseInputReturn
         updateRegularExpense(input: _Update_RegularExpenseInput): RegularExpenseInputReturn
         deleteRegularExpense(input: _Delete_RegularExpenseInput): RegularExpenseInputReturn
+        createExpense(input: _New_ExpenseInput): ExpenseInputReturn
         deleteExpense(input: _Delete_ExpenseInput): ExpenseInputReturn
     }`;
 
