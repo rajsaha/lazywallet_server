@@ -1,13 +1,14 @@
 import {Expense} from "../data/models/Expense";
 import mongoose from "mongoose";
+import {GeneralUtils} from "../utils/GeneralUtils";
 
 const HomeService = (() => {
     const getHomeData = async (input) => {
         return new Promise(async (resolve, reject) => {
             try {
-                let spentToday = 0;
-                let spentThisMonth = 0;
-                let spentMostOn = "";
+                let spentToday;
+                let spentThisMonth;
+                let spentMostOn;
 
                 // Today
                 const _result_spentToday = await Expense.aggregate([
@@ -23,12 +24,16 @@ const HomeService = (() => {
                     {
                         $group: {
                             _id: null,
-                            total: {$sum: "$amount"}
+                            total: {
+                                $sum: {
+                                    $size: "$amount"
+                                }
+                            }
                         }
                     },
                 ]);
 
-                spentToday = _result_spentToday[0].total;
+                spentToday = GeneralUtils.isArrayEmpty(_result_spentToday) ? _result_spentToday[0].total : 0;
 
                 // This month
                 const _result_spentThisMonth = await Expense.aggregate([
@@ -49,7 +54,7 @@ const HomeService = (() => {
                     },
                 ]);
 
-                spentThisMonth = _result_spentThisMonth[0].total;
+                spentThisMonth = GeneralUtils.isArrayEmpty(_result_spentThisMonth) ? _result_spentThisMonth[0].total : 0;
 
                 // Spent most on
                 const _result_spentMostOn = await Expense.aggregate([
@@ -75,7 +80,7 @@ const HomeService = (() => {
                     },
                 ]);
 
-                spentMostOn = _result_spentMostOn[0].typeDesc[0];
+                spentMostOn = GeneralUtils.isArrayEmpty(_result_spentMostOn) ? _result_spentMostOn[0].typeDesc[0] : "n/a";
 
                 resolve({
                     spentToday: spentToday,
