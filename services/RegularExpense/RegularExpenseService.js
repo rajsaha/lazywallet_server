@@ -1,4 +1,4 @@
-import {RegExpense} from "../data/models/RegExpense";
+import {RegExpense} from "../../data/models/RegExpense";
 import mongoose from "mongoose";
 
 const RegularExpenseService = (() => {

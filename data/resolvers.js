@@ -1,7 +1,8 @@
-import {RegularExpenseService} from "../services/RegularExpenseService";
-import {ExpenseService} from "../services/ExpenseService";
+import {RegularExpenseService} from "../services/RegularExpense/RegularExpenseService";
+import {ExpenseService} from "../services/Expense/ExpenseService";
 import {GraphQLDateTime} from "graphql-iso-date";
-import {HomeService} from "../services/Home";
+import {HomeService} from "../services/Home/Home";
+import {SignupService} from "../services/Signup/Signup";
 
 // resolver map
 const customScalarResolver = {
@@ -51,6 +52,11 @@ const resolvers = {
         },
         deleteExpense: async (root, {input}) => {
             const _result = await ExpenseService.deleteExpense(input);
+            return _result;
+        },
+        // Signup
+        createUser: async (root, {input}) => {
+            const _result = await SignupService.signup(input);
             return _result;
         }
     },

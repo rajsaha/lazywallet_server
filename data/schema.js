@@ -12,6 +12,7 @@ const typeDefs = `
     ${Fragment_RegularExpense}
     ${Fragment_User}
     ${Fragment_Home}
+    
     type Query {
         getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpenses]
         getRegularExpense(id: ID, userId: ID): [_RegExpense]
@@ -25,6 +26,7 @@ const typeDefs = `
         deleteRegularExpense(input: _Delete_RegularExpenseInput): RegularExpenseInputReturn
         createExpense(input: _New_ExpenseInput): ExpenseInputReturn
         deleteExpense(input: _Delete_ExpenseInput): ExpenseInputReturn
+        createUser(input: _New_UserInput): UserInputReturn
     }`;
 
 const schema = makeExecutableSchema({typeDefs, resolvers: [customScalarResolver, resolvers]})

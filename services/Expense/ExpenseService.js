@@ -1,4 +1,4 @@
-import {Expense} from "../data/models/Expense";
+import {Expense} from "../../data/models/Expense";
 import mongoose from "mongoose";
 
 const ExpenseService = (() => {

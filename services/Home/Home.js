@@ -1,6 +1,6 @@
-import {Expense} from "../data/models/Expense";
+import {Expense} from "../../data/models/Expense";
 import mongoose from "mongoose";
-import {GeneralUtils} from "../utils/GeneralUtils";
+import {GeneralUtils} from "../../utils/GeneralUtils";
 
 const HomeService = (() => {
     const getHomeData = async (input) => {
