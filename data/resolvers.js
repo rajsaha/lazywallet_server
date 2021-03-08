@@ -2,7 +2,6 @@ import {RegularExpenseService} from "../services/RegularExpense/RegularExpenseSe
 import {ExpenseService} from "../services/Expense/ExpenseService";
 import {GraphQLDateTime} from "graphql-iso-date";
 import {HomeService} from "../services/Home/Home";
-import {SignupService} from "../services/Signup/Signup";
 
 // resolver map
 const customScalarResolver = {
@@ -13,52 +12,38 @@ const resolvers = {
     Query: {
         // Regular Expenses
         getRegularExpenses: async (root, {pageNo, size, skip, userId}) => {
-            const _result = await RegularExpenseService.getRegularExpenses({pageNo, size, skip, userId});
-            return _result;
+            return await RegularExpenseService.getRegularExpenses({pageNo, size, skip, userId});
         },
         getRegularExpense: async (root, {id, userId}) => {
-            const _result = await RegularExpenseService.getRegularExpense({id, userId});
-            return _result;
+            return await RegularExpenseService.getRegularExpense({id, userId});
         },
         // Expense / History
         getExpenses: async (root, {pageNo, size, skip, userId, period}) => {
-            const _result = await ExpenseService.getExpenses({pageNo, size, skip, userId, period});
-            return _result;
+            return await ExpenseService.getExpenses({pageNo, size, skip, userId, period});
         },
         // Home
         getHomeData: async (root, {userId}) => {
-            const _result = await HomeService.getHomeData({userId});
-            return _result;
-        }
+            return await HomeService.getHomeData({userId});
+        },
     },
     Mutation: {
         // Regular Expenses
         createRegularExpense: async (root, {input}) => {
-            const _result = await RegularExpenseService.createRegularExpense(input);
-            return _result;
+            return await RegularExpenseService.createRegularExpense(input);
         },
         updateRegularExpense: async (root, {input}) => {
-            const _result = await RegularExpenseService.updateRegularExpense(input);
-            return _result;
+            return await RegularExpenseService.updateRegularExpense(input);
         },
         deleteRegularExpense: async (root, {input}) => {
-            const _result = await RegularExpenseService.deleteRegularExpense(input);
-            return _result;
+            return await RegularExpenseService.deleteRegularExpense(input);
         },
         // Expense / History
         createExpense: async (root, {input}) => {
-            const _result = await ExpenseService.createExpense(input);
-            return _result;
+            return await ExpenseService.createExpense(input);
         },
         deleteExpense: async (root, {input}) => {
-            const _result = await ExpenseService.deleteExpense(input);
-            return _result;
+            return await ExpenseService.deleteExpense(input);
         },
-        // Signup
-        createUser: async (root, {input}) => {
-            const _result = await SignupService.signup(input);
-            return _result;
-        }
     },
 };
 

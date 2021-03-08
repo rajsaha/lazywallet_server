@@ -5,11 +5,6 @@ const Fragment_User = `
         password: String
     }
     
-    type UserInputReturn {
-        email: String
-        username: String
-    }
-    
     input _New_UserInput {
         email: String
         username: String

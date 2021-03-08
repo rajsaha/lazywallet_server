@@ -1,11 +1,12 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import indexRouter from './routes/index';
 import {graphqlHTTP} from "express-graphql";
 import {schema} from './data/schema';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import {loginRouter} from "./api/routes/login/Login";
+import {signupRouter} from "./api/routes/signup/Signup";
 
 dotenv.config({path: './dev.env'});
 const mongodb_connection_string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ddnqu.mongodb.net/lazywallet?retryWrites=true&w=majority`;
@@ -16,7 +17,7 @@ mongoose
         useFindAndModify: false,
         useUnifiedTopology: true
     })
-    .then(res => {
+    .then(() => {
         console.log("Connected to database");
     });
 
@@ -32,11 +33,13 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use('/', indexRouter);
 
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
 }));
+
+app.use("/login", loginRouter);
+app.use("/signup", signupRouter);
 
 export {app};

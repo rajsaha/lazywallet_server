@@ -6,7 +6,7 @@ const ExpenseService = (() => {
         return new Promise((resolve, reject) => {
             try {
                 // Time
-                let timestamp = {};
+                let timestamp;
                 switch (input.period) {
                     case "today":
                         timestamp = {
@@ -147,7 +147,7 @@ const ExpenseService = (() => {
                     else resolve(doc);
                 });
             } catch (err) {
-                reject({error: true, message: err.message})
+                reject({error: true, message: err.message});
             }
         })
     }
@@ -155,12 +155,12 @@ const ExpenseService = (() => {
     const deleteExpense = async (input) => {
         return new Promise(((resolve, reject) => {
             try {
-                Expense.findOneAndRemove({_id: input.id, userId: input.userId}, (err, doc, res) => {
+                Expense.findOneAndRemove({_id: input.id, userId: input.userId}, (err, doc) => {
                     if (err) reject({error: true, message: err.message})
                     else resolve(doc);
                 });
             } catch (err) {
-                reject({error: true, message: err.message})
+                reject({error: true, message: err.message});
             }
         }))
     }

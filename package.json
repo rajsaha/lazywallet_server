@@ -16,6 +16,7 @@
     "graphql": "^15.5.0",
     "graphql-iso-date": "^3.6.1",
     "graphql-tools": "^7.0.4",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.18",
     "morgan": "~1.9.1"
   },
