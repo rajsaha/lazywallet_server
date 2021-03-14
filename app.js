@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import {loginRouter} from "./api/routes/login/Login";
 import {signupRouter} from "./api/routes/signup/Signup";
+import {checkIfAuthenticated} from "./services/Auth/CheckIfAuthorized";
 
 dotenv.config({path: './dev.env'});
 const mongodb_connection_string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ddnqu.mongodb.net/lazywallet?retryWrites=true&w=majority`;
@@ -60,7 +61,7 @@ app.use((req, res, next) => {
 
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
-app.use('/graphql', graphqlHTTP({
+app.use('/graphql', checkIfAuthenticated, graphqlHTTP({
     schema,
     graphiql: true
 }));
