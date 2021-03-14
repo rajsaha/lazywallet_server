@@ -88,5 +88,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   _debug('Listening on ' + bind);
-  console.log('Running on port server localhost:8080/graphql');
+  console.log('Running on port server localhost:8080');
 }

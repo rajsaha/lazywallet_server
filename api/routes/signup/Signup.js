@@ -2,7 +2,7 @@ import express from "express";
 const signupRouter = express.Router();
 import {SignupService} from "../../../services/Signup/Signup";
 
-signupRouter.post("/signup", async (req, res) => {
+signupRouter.post("/", async (req, res) => {
     try {
         const response = await SignupService.signup({
             email: req.body.email,

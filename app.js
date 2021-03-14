@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import cors from 'cors';
 import {graphqlHTTP} from "express-graphql";
 import {schema} from './data/schema';
 import mongoose from 'mongoose';
@@ -29,17 +30,39 @@ mongoose.connection.on("error", err => {
 mongoose.set("useCreateIndex", true);
 
 let app = express();
+
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
+// Handling CORS
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+        res.header(
+            "Access-Control-Allow-Methods",
+            "PUT",
+            "POST",
+            "PATCH",
+            "DELETE",
+            "GET"
+        );
+        return res.status(200).json({});
+    }
+    next();
+});
+
+app.use("/login", loginRouter);
+app.use("/signup", signupRouter);
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
 }));
-
-app.use("/login", loginRouter);
-app.use("/signup", signupRouter);
 
 export {app};
