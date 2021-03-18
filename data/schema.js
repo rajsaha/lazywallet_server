@@ -4,6 +4,7 @@ import {Fragment_RegularExpense} from "./schemaTypeDefFragments/TypeDef_Fragment
 import {Fragment_User} from "./schemaTypeDefFragments/TypeDef_Fragment_User";
 import {Fragment_Expense} from "./schemaTypeDefFragments/TypeDef_Fragment_Expense";
 import {Fragment_Home} from "./schemaTypeDefFragments/TypeDef_Fragment_Home";
+import {Fragment_ExpenseType} from "./schemaTypeDefFragments/TypeDef_Fragment_ExpenseType";
 
 const typeDefs = `
     scalar Date
@@ -12,12 +13,14 @@ const typeDefs = `
     ${Fragment_RegularExpense}
     ${Fragment_User}
     ${Fragment_Home}
+    ${Fragment_ExpenseType}
     
     type Query {
         getRegularExpenses(pageNo: Int, size: Int, skip: Int, userId: ID): [RegularExpenses]
         getRegularExpense(id: ID, userId: ID): [_RegExpense]
         getExpenses(pageNo: Int, size: Int, skip: Int, userId: ID, period: String): [Expenses]
         getHomeData(userId: ID): HomeData
+        getExpenseTypes: [ExpenseType]
     }
     
     type Mutation {

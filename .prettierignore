@@ -1,0 +1,7 @@
+**/node_modules
+dev.env
+package.json
+package-lock.json
+.babelrc
+**/.idea
+**/key

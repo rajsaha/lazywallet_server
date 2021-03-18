@@ -12,4 +12,4 @@ let ExpenseTypeSchema = new mongoose.Schema({
 
 
 let ExpenseType = mongoose.model('ExpenseType', ExpenseTypeSchema);
-module.exports = ExpenseType;
+export {ExpenseType};

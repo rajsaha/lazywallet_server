@@ -25,6 +25,9 @@ const resolvers = {
         getHomeData: async (root, {userId}) => {
             return await HomeService.getHomeData({userId});
         },
+        getExpenseTypes: async (root, {}) => {
+            return await HomeService.getExpenseTypes();
+        }
     },
     Mutation: {
         // Regular Expenses
