@@ -1,10 +1,10 @@
-import {makeExecutableSchema} from 'graphql-tools';
-import {customScalarResolver, resolvers} from "./resolvers";
-import {Fragment_RegularExpense} from "./schemaTypeDefFragments/TypeDef_Fragment_RegularExpense";
-import {Fragment_User} from "./schemaTypeDefFragments/TypeDef_Fragment_User";
-import {Fragment_Expense} from "./schemaTypeDefFragments/TypeDef_Fragment_Expense";
-import {Fragment_Home} from "./schemaTypeDefFragments/TypeDef_Fragment_Home";
-import {Fragment_ExpenseType} from "./schemaTypeDefFragments/TypeDef_Fragment_ExpenseType";
+import { makeExecutableSchema } from "graphql-tools";
+import { customScalarResolver, resolvers } from "./resolvers";
+import { Fragment_RegularExpense } from "./schemaTypeDefFragments/TypeDef_Fragment_RegularExpense";
+import { Fragment_User } from "./schemaTypeDefFragments/TypeDef_Fragment_User";
+import { Fragment_Expense } from "./schemaTypeDefFragments/TypeDef_Fragment_Expense";
+import { Fragment_Home } from "./schemaTypeDefFragments/TypeDef_Fragment_Home";
+import { Fragment_ExpenseType } from "./schemaTypeDefFragments/TypeDef_Fragment_ExpenseType";
 
 const typeDefs = `
     scalar Date
@@ -31,6 +31,9 @@ const typeDefs = `
         deleteExpense(input: _Delete_ExpenseInput): ExpenseInputReturn
     }`;
 
-const schema = makeExecutableSchema({typeDefs, resolvers: [customScalarResolver, resolvers]})
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers: [customScalarResolver, resolvers],
+});
 
-export {schema};
+export { schema };

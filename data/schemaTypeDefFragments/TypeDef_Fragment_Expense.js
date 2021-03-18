@@ -48,4 +48,4 @@ const Fragment_Expense = `
     }
 `;
 
-export {Fragment_Expense};
+export { Fragment_Expense };

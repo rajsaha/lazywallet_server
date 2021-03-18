@@ -6,4 +6,4 @@ const Fragment_Home = `
     }
 `;
 
-export {Fragment_Home};
+export { Fragment_Home };

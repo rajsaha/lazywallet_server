@@ -4,4 +4,4 @@ const Fragment_ExpenseType = `
         typeDesc: String
     }`;
 
-export {Fragment_ExpenseType};
+export { Fragment_ExpenseType };

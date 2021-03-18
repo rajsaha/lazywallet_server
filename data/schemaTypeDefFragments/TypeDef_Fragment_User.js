@@ -11,4 +11,4 @@ const Fragment_User = `
         password: String
     }`;
 
-export {Fragment_User};
+export { Fragment_User };

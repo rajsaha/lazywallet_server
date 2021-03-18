@@ -70,4 +70,4 @@ const Fragment_RegularExpense = `
     }
 `;
 
-export {Fragment_RegularExpense};
+export { Fragment_RegularExpense };
