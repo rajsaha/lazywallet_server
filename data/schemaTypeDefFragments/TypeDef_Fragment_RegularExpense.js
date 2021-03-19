@@ -11,7 +11,7 @@ const Fragment_RegularExpense = `
     
     type _RegExpense {
         _id: ID
-        typeId: [Int]
+        typeId: ID
         typeDesc: [String]
         title: String
         amount: Int

@@ -26,9 +26,7 @@ const HomeService = (() => {
             $group: {
               _id: null,
               total: {
-                $sum: {
-                  $size: "$amount",
-                },
+                $sum: "$amount",
               },
             },
           },

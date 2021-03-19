@@ -157,7 +157,7 @@ const RegularExpenseService = (() => {
                 {
                   $project: {
                     _id: 1,
-                    typeId: "$expensetype.typeId",
+                    typeId: 1,
                     typeDesc: "$expensetype.typeDesc",
                     title: 1,
                     amount: 1,
