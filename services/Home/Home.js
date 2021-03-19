@@ -78,9 +78,10 @@ const HomeService = (() => {
             $group: {
               _id: "$typeId",
               typeDesc: { $first: "$expensetype.typeDesc" },
-              count: { $sum: 1 },
+              count: { $sum: "$amount" },
             },
           },
+          {$sort: {count: -1}},
         ]);
 
         spentMostOn = GeneralUtils.isArrayEmpty(_result_spentMostOn)
