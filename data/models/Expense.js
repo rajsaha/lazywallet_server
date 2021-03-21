@@ -19,6 +19,10 @@ const ExpenseSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  dateCreatedAt: {
+    type: Date,
+    required: true
+  },
   timestamp: {
     type: Date,
     default: Date.now,

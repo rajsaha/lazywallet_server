@@ -89,6 +89,8 @@ const ExpenseService = (() => {
                     title: 1,
                     amount: 1,
                     timestamp: 1,
+                    dateCreatedAt: 1,
+                    doc: "$$ROOT",
                   },
                 },
                 {
@@ -96,6 +98,17 @@ const ExpenseService = (() => {
                 },
                 {
                   $limit: query.limit,
+                },
+                {
+                  $group: {
+                    _id: "$dateCreatedAt",
+                    records: { $push: "$$ROOT" },
+                  },
+                },
+                {
+                  $sort: {
+                    day: -1,
+                  },
                 },
               ],
               count: [
@@ -126,11 +139,27 @@ const ExpenseService = (() => {
                   },
                 },
               ],
+              dates: [
+                {
+                  $match: {
+                    userId: mongoose.Types.ObjectId(input.userId),
+                  },
+                },
+                {
+                  $group: {
+                    _id: "$dateCreatedAt",
+                  },
+                },
+              ],
             },
           },
         ]).exec((err, result) => {
-          if (err) reject({ error: true, message: err.message });
-          else resolve(result);
+          if (err) {
+            reject({ error: true, message: err.message });
+          } else {
+            console.group(result[0].dates);
+            resolve(result);
+          }
         });
       } catch (err) {
         reject({ error: true, message: err.message });
@@ -141,11 +170,16 @@ const ExpenseService = (() => {
   const createExpense = async (input) => {
     return new Promise((resolve, reject) => {
       try {
+        const year = new Date().getUTCFullYear();
+        const month = new Date().getUTCMonth() + 1;
+        const day = new Date().getDate();
+
         const newExpense = new Expense({
           typeId: input.typeId,
           userId: input.userId,
           title: input.title,
           amount: input.amount,
+          dateCreatedAt: new Date(Date.UTC(year, month, day, 0, 0, 0, 0))
         });
 
         newExpense.save((err, doc) => {

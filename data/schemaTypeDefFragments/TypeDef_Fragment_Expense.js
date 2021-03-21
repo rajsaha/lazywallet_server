@@ -1,12 +1,22 @@
 const Fragment_Expense = `
     type Expenses {
-        expenses: [_Expense]
+        expenses: [ExpensesWrapper]
         count: [_count]
-        total: [_total]
+        total: [_Total]
+        dates: [_Date]
     }
     
-    type _total {
+    type _Total {
         total: Int
+    }
+
+    type ExpensesWrapper {
+        _id: Date
+        records: [_Expense]
+    }
+
+    type _Date {
+        _id: Date
     }
     
     type _Expense {
