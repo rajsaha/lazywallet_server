@@ -2,15 +2,25 @@ import { Expense } from "../../data/models/Expense";
 import { ExpenseType } from "../../data/models/ExpenseType";
 import mongoose from "mongoose";
 import { GeneralUtils } from "../../utils/GeneralUtils";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 const HomeService = (() => {
+  dayjs.extend(utc);
   const getHomeData = async (input) => {
     return new Promise(async (resolve, reject) => {
       try {
         let spentToday;
         let spentThisMonth;
         let spentMostOn;
-
+        const month = dayjs().get("month") + 1;
+        const year = dayjs().get("year");
+        const daysInMonth = dayjs().daysInMonth();
+        const startString = `${year}-${month}-01`;
+        const endString = `${year}-${month}-${daysInMonth}`;
+        const startOfMonthDate = dayjs.utc(startString).toDate();
+        const endOfMonthDate = dayjs.utc(endString).toDate();
+        
         // Today
         const _result_spentToday = await Expense.aggregate([
           {
@@ -42,8 +52,8 @@ const HomeService = (() => {
             $match: {
               userId: mongoose.Types.ObjectId(input.userId),
               timestamp: {
-                $lt: new Date(),
-                $gte: new Date(new Date().setDate(new Date().getDate() - 30)),
+                $lt: endOfMonthDate,
+                $gte: startOfMonthDate,
               },
             },
           },

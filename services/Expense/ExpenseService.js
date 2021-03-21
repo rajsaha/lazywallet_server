@@ -14,10 +14,16 @@ const ExpenseService = (() => {
               $gte: new Date(new Date().setDate(new Date().getDate() - 1)),
             };
             break;
-          case "this_week":
+          case "last_seven_days":
             timestamp = {
               $lt: new Date(),
               $gte: new Date(new Date().setDate(new Date().getDate() - 7)),
+            };
+            break;
+          case "last_thirty_days":
+            timestamp = {
+              $lt: new Date(),
+              $gte: new Date(new Date().setDate(new Date().getDate() - 30)),
             };
             break;
           case "everything":
