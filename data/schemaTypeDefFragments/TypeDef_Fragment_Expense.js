@@ -26,6 +26,7 @@ const Fragment_Expense = `
         title: String
         amount: Int
         timestamp: Date
+        dateCreatedAt: Date
     }
     
     type ExpenseInputReturn {

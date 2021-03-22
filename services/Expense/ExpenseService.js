@@ -157,7 +157,6 @@ const ExpenseService = (() => {
           if (err) {
             reject({ error: true, message: err.message });
           } else {
-            console.group(result[0].dates);
             resolve(result);
           }
         });
